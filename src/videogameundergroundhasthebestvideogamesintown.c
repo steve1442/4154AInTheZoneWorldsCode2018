@@ -62,7 +62,7 @@ while(brokeit){ // game loop
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 char map[2][17] = {{"                "},
-{"                "}};
+                   {"                "}};
 
 void bettergame()
 {
@@ -72,7 +72,7 @@ void bettergame()
   bool bettergameloop = true;
   while(bettergameloop){
     //for(int i = 0; i > 16; i++){map[0][i] = ' ';map[1][i] = ' ';}
-/*    wall1[0]--;wall1[1]--;
+    wall1[0]--;wall1[1]--;
     wall2[0]--;wall2[1]--;
     wall3[0]--;wall3[1]--;
     wall4[0]--;wall4[1]--;
@@ -88,7 +88,7 @@ void bettergame()
     map[wall2[1]][wall2[0]] = '|';
     map[wall3[1]][wall3[0]] = '|';
     map[wall4[1]][wall4[0]] = '|';
-    if(map[playery][4] == '|'){hp--;}*/
+    if(map[playery][4] == '|'){hp--;}
     if(joystickGetAnalog(1, 3) > 50){playery = 0;}
     else if(joystickGetAnalog(1, 3) < -50){playery = 1;}
     if(hp == 2){map[playery][4] = 'o';}

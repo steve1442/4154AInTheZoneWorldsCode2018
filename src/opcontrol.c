@@ -30,8 +30,6 @@
  * This task should never exit; it should end with some kind of infinite loop, even if empty.
  */
 void operatorControl() {
-//	lcdPrint(uart1, 1, "test");
-	//bettergame();
 	TaskHandle UPDATE = taskRunLoop(update, 10);
 	TaskHandle LCDDEBUG = taskRunLoop(LCDDebugScreens, 10);
 	while (1) {
@@ -44,6 +42,6 @@ void operatorControl() {
 		else{roller(15);}
 	delay(20);
 	}
-	//taskDelete(UPDATE);
+	taskDelete(UPDATE);
 	taskDelete(LCDDEBUG);
 }
