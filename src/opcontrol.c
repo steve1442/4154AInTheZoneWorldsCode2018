@@ -12,28 +12,28 @@
 
 #include "main.h"
 
-/*
- * Runs the user operator control code. This function will be started in its own task with the
- * default priority and stack size whenever the robot is enabled via the Field Management System
- * or the VEX Competition Switch in the operator control mode. If the robot is disabled or
- * communications is lost, the operator control task will be stopped by the kernel. Re-enabling
- * the robot will restart the task, not resume it from where it left off.
- *
- * If no VEX Competition Switch or Field Management system is plugged in, the VEX Cortex will
- * run the operator control task. Be warned that this will also occur if the VEX Cortex is
- * tethered directly to a computer via the USB A to A cable without any VEX Joystick attached.
- *
- * Code running in this task can take almost any action, as the VEX Joystick is available and
- * the scheduler is operational. However, proper use of delay() or taskDelayUntil() is highly
- * recommended to give other tasks (including system tasks such as updating LCDs) time to run.
+const unsigned int TrueSpeed[128] =
+{
+  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+  0, 21, 21, 21, 22, 22, 22, 23, 24, 24,
+ 25, 25, 25, 25, 26, 27, 27, 28, 28, 28,
+ 28, 29, 30, 30, 30, 31, 31, 32, 32, 32,
+ 33, 33, 34, 34, 35, 35, 35, 36, 36, 37,
+ 37, 37, 37, 38, 38, 39, 39, 39, 40, 40,
+ 41, 41, 42, 42, 43, 44, 44, 45, 45, 46,
+ 46, 47, 47, 48, 48, 49, 50, 50, 51, 52,
+ 52, 53, 54, 55, 56, 57, 57, 58, 59, 60,
+ 61, 62, 63, 64, 65, 66, 67, 67, 68, 70,
+ 71, 72, 72, 73, 74, 76, 77, 78, 79, 79,
+ 80, 81, 83, 84, 84, 86, 86, 87, 87, 88,
+ 88, 89, 89, 90, 90,127,127,127
+};
 
- * This task should never exit; it should end with some kind of infinite loop, even if empty.
- */
 void operatorControl() {
 	TaskHandle UPDATE = taskRunLoop(update, 10);
 	TaskHandle LCDDEBUG = taskRunLoop(LCDDebugScreens, 10);
 	while (1) {
-		drive(joystickGetAnalog(1, 3), joystickGetAnalog(1, 2));
+		drive(TrueSpeed[abs(joystickGetAnalog(1, 3))] * (joystickGetAnalog(1, 3)/abs(joystickGetAnalog(1, 3))),TrueSpeed[abs(joystickGetAnalog(1, 2))] * (joystickGetAnalog(1, 2)/abs(joystickGetAnalog(1, 2))));
   	mogo(-127 * (joystickGetDigital(1, 5, JOY_UP) - joystickGetDigital(1, 5, JOY_DOWN)));
     lift(127 * (joystickGetDigital(1, 6, JOY_UP) - joystickGetDigital(1, 6, JOY_DOWN)));
     secondaryLift(127 * (joystickGetDigital(1, 8, JOY_UP) - joystickGetDigital(1, 8, JOY_DOWN)));
