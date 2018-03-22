@@ -19,11 +19,11 @@ void mogotask(void * ignore)//mom go get me 1 cocaine
   mogo(0); // seriously stop
 }
 
-void mogointask(void * ignore)//mom go get me a sandwich
+void mogointask(void * ignore)
 {
-  mogo(-127);//mom go
-  wait(900);//mom wait
-  mogo(0);//mom go
+  mogo(-127);
+  wait(900);
+  mogo(0);
 }
 
 void outtaketask()//outtakes the task

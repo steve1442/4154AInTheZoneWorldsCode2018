@@ -1,15 +1,3 @@
-/** @file opcontrol.c
- * @brief File for operator control code
- *
- * This file should contain the user operatorControl() function and any functions related to it.
- *
- * Any copyright is dedicated to the Public Domain.
- * http://creativecommons.org/publicdomain/zero/1.0/
- *
- * PROS contains FreeRTOS (http://www.freertos.org) whose source code may be
- * obtained from http://sourceforge.net/projects/freertos/files/ or on request.
- */
-
 #include "main.h"
 
 const unsigned int TrueSpeed[128] =
@@ -33,14 +21,15 @@ void operatorControl() {
 	TaskHandle UPDATE = taskRunLoop(update, 10);
 	TaskHandle LCDDEBUG = taskRunLoop(LCDDebugScreens, 10);
 	while (1) {
-		drive(TrueSpeed[abs(joystickGetAnalog(1, 3))] * (joystickGetAnalog(1, 3)/abs(joystickGetAnalog(1, 3))),TrueSpeed[abs(joystickGetAnalog(1, 2))] * (joystickGetAnalog(1, 2)/abs(joystickGetAnalog(1, 2))));
+		drive(TrueSpeed[abs(joystickGetAnalog(1, 3))] * (joystickGetAnalog(1, 3)/abs(joystickGetAnalog(1, 3))),
+		TrueSpeed[abs(joystickGetAnalog(1, 2))] * (joystickGetAnalog(1, 2)/abs(joystickGetAnalog(1, 2))));
   	mogo(-127 * (joystickGetDigital(1, 5, JOY_UP) - joystickGetDigital(1, 5, JOY_DOWN)));
     lift(127 * (joystickGetDigital(1, 6, JOY_UP) - joystickGetDigital(1, 6, JOY_DOWN)));
     secondaryLift(127 * (joystickGetDigital(1, 8, JOY_UP) - joystickGetDigital(1, 8, JOY_DOWN)));
 		if(joystickGetDigital(1, 7, JOY_UP)){roller(50);}
 		else if(joystickGetDigital(1, 7, JOY_DOWN)){roller(-100);}
 		else{roller(15);}
-	delay(20);
+		delay(20);
 	}
 	taskDelete(UPDATE);
 	taskDelete(LCDDEBUG);
