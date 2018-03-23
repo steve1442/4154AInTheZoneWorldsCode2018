@@ -4,8 +4,8 @@ char motor[11] = {0,0,0,0,0,0,0,0,0,0,0};
 
 void lift(int pwm)
 {
-  motor[1] = pwm;
-  motor[9] = pwm;
+  motor[6] = pwm;
+  motor[7] = pwm;
 }
 
 void secondaryLift(int pwm)
@@ -28,8 +28,8 @@ void roller(int pwm)
 
 void mogo(int pwm)
 {
-  motor[6] = pwm;
-  motor[7] = pwm;
+  motor[1] = pwm;
+  motor[10] = pwm;
 }
 
 void encoderreset()
