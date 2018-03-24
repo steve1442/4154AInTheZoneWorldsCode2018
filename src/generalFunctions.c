@@ -23,7 +23,7 @@ void drive(int left, int right)
 
 void roller(int pwm)
 {
-  motor[9] = pwm;
+  motor[8] = pwm;
 }
 
 void mogo(int pwm)

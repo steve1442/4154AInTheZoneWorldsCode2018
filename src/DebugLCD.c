@@ -15,9 +15,9 @@ void LCDDebugScreens()
   switch(debugScreen)
   {
     case 0:
-    lcdPrint( uart2, 1, "   Main Bat %d", powerLevelMain());
+    lcdPrint(uart2, 1, "   Main Bat %d", powerLevelMain());
     lcdPrint(uart2, 2, "Back-up Bat %d", powerLevelMain());
-    lcdPrint( uart1, 1, "   Main Bat %d", powerLevelMain());
+    lcdPrint(uart1, 1, "   Main Bat %d", powerLevelMain());
     lcdPrint(uart1, 2, "Back-up Bat %d", powerLevelMain());
     break;
     case 1:
