@@ -63,6 +63,8 @@ void LCDDebugScreens()
     lcdPrint(uart1, 2, "No Debug Screen");
     break;
   }
+  lcddebuglastvaluart1 = lcdReadButtons(uart1);
+  lcddebuglastvaluart2 = lcdReadButtons(uart2);
   lastDebugJT = debugJT;
   konamicodefunc();
   delay(2);

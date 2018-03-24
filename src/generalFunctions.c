@@ -1,4 +1,4 @@
-#include "main.h"
+  #include "main.h"
 
 char motor[11] = {0,0,0,0,0,0,0,0,0,0,0};
 
@@ -23,7 +23,7 @@ void drive(int left, int right)
 
 void roller(int pwm)
 {
-  motor[1] = pwm;
+  motor[9] = pwm;
 }
 
 void mogo(int pwm)
