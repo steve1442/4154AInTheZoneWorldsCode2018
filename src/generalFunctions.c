@@ -66,17 +66,12 @@ void holdtheline(int ticks, int pwm)
   drive(0, 0);
 }
 
-void stabalizationcode(int ticks, int pwm)
+void stabalizationcode(int pwm)
 {
-  encoderreset();
-  while(abs(ticks) > abs(encoderGet(leftenc)))
-  {
-    int error = encoderGet(leftenc) - encoderGet(rightenc);
+    int error = encoderGet(leftliftenc) - encoderGet(rightliftenc);
     int left = pwm;
     int right = pwm + error;
     lift(left, right);
-  }
-  lift(0,0);
 }
 
 void update()

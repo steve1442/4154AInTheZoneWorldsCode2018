@@ -23,10 +23,10 @@ void operatorControl() {
 	while (1) {
 		drive(TrueSpeed[abs(joystickGetAnalog(1, 3))] * (joystickGetAnalog(1, 3)/abs(joystickGetAnalog(1, 3))),
 		TrueSpeed[abs(joystickGetAnalog(1, 2))] * (joystickGetAnalog(1, 2)/abs(joystickGetAnalog(1, 2))));
-		//drive(joystickGetAnalog(1, 3), joystickGetAnalog(1, 2));
 		mogo(-127 * (joystickGetDigital(1, 5, JOY_UP) - joystickGetDigital(1, 5, JOY_DOWN)));
-    lift(127 * (joystickGetDigital(1, 6, JOY_UP) - joystickGetDigital(1, 6, JOY_DOWN)), 127 * (joystickGetDigital(1, 6, JOY_UP) - joystickGetDigital(1, 6, JOY_DOWN)));
-    secondaryLift(127 * (joystickGetDigital(1, 8, JOY_UP) - joystickGetDigital(1, 8, JOY_DOWN)));
+    //lift(127 * (joystickGetDigital(1, 6, JOY_UP) - joystickGetDigital(1, 6, JOY_DOWN)), 127 * (joystickGetDigital(1, 6, JOY_UP) - joystickGetDigital(1, 6, JOY_DOWN)));
+		stabalizationcode(127 * (joystickGetDigital(1, 6, JOY_UP) - joystickGetDigital(1, 6, JOY_DOWN)));
+		secondaryLift(127 * (joystickGetDigital(1, 8, JOY_UP) - joystickGetDigital(1, 8, JOY_DOWN)));
 		if(joystickGetDigital(1, 7, JOY_UP)){roller(50);}
 		else if(joystickGetDigital(1, 7, JOY_DOWN)){roller(-100);}
 		else{roller(15);}

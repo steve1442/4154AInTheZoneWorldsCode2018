@@ -95,6 +95,8 @@ void bettergame();
 
 void game();
 
+void stabalizationcode(int pwm);
+
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
 extern "C" {

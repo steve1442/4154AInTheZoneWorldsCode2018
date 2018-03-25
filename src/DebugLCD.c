@@ -27,10 +27,10 @@ void LCDDebugScreens()
     lcdPrint(uart1, 2, "runtime:  %lum%lus", millis()/60000, millis()%60000/1000);
     break;
     case 2:
-    lcdPrint(uart2, 1, "secondary %d", analogRead(5));
-    lcdPrint(uart2, 2, "hek");
-    lcdPrint(uart1, 1, "secondary %d", analogRead(5));
-    lcdPrint(uart1, 2, "hek");
+    lcdPrint(uart2, 1, "Left Lift %d", encoderGet(leftliftenc));
+    lcdPrint(uart2, 2, "Right Lift %d", encoderGet(rightliftenc));
+    lcdPrint(uart1, 1, "Left Lift %d", encoderGet(leftliftenc));
+    lcdPrint(uart1, 2, "Right Lift %d", encoderGet(rightliftenc));
     break;
     case 3:
     lcdPrint(uart2, 1, "leftD %d", encoderGet(leftenc));
