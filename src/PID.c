@@ -26,7 +26,7 @@ void primaryLiftPID(int desired)
         }
   float derivitive = (currentVal - primaryLastVal);
   float output = PIDDebug[0][0] * error + PIDDebug[0][1] * pidIntegral + PIDDebug[0][2] * derivitive;
-  lift(output);
+  lift(output, output);
   primaryLastVal = currentVal;
 }
 
@@ -47,12 +47,12 @@ void pid()
   if(joystickGetDigital(1, 6, JOY_UP))
   {
     PIDDesired[0] = analogRead(1);
-    lift(127);
+    lift(127, 127);
   }
   else if(joystickGetDigital(1, 6, JOY_DOWN))
   {
     PIDDesired[0] = analogRead(1);
-    lift(-127);
+    lift(-127, -127);
   }
   else
   {

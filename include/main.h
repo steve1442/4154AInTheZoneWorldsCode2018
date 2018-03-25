@@ -35,6 +35,10 @@ Encoder leftenc;
 
 Encoder rightenc;
 
+Encoder leftliftenc;
+
+Encoder rightliftenc;
+
 extern float PIDDebug[5][3];
 
 extern int PIDDesired[5];
@@ -47,7 +51,7 @@ void secondaryLiftPID(int desired);
 
 extern int leftime, rightime;
 
-void lift(int pwm); // A basic function to control the lift whether it be an elevator or a four bar
+void lift(int left, int right); // A basic function to control the lift whether it be an elevator or a four bar
 
 void secondaryLift(int pwm); // A basic function to control the secondary lift system whether that be chain bar or four bar
 

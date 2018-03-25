@@ -1,7 +1,7 @@
 #include "main.h"
 
 void auton2()
-{
+{/*
   roller(15);
   mogo(127);
   lift(127);
@@ -48,4 +48,4 @@ void auton2()
     lcdPrint(uart2, 1, "works");
     drive(127, 127);}
   drive(0,0);
-}
+*/}

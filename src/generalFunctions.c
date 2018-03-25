@@ -2,10 +2,10 @@
 
 char motor[11] = {0,0,0,0,0,0,0,0,0,0,0};
 
-void lift(int pwm)
+void lift(int left, int right)
 {
-  motor[6] = pwm;
-  motor[7] = pwm;
+  motor[6] = left;
+  motor[7] = right;
 }
 
 void secondaryLift(int pwm)
@@ -64,6 +64,19 @@ void holdtheline(int ticks, int pwm)
     drive(left, right);
   }
   drive(0, 0);
+}
+
+void stabalizationcode(int ticks, int pwm)
+{
+  encoderreset();
+  while(abs(ticks) > abs(encoderGet(leftenc)))
+  {
+    int error = encoderGet(leftenc) - encoderGet(rightenc);
+    int left = pwm;
+    int right = pwm + error;
+    lift(left, right);
+  }
+  lift(0,0);
 }
 
 void update()
