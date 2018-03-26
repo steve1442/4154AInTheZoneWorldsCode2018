@@ -29,6 +29,6 @@ void gyroTurn(int desired)
     while(abs(gyroGet(gyro)) < abs(desired))
     {
         int output = desired - gyroGet(gyro);
-        drive(output, output);  // the reason why one isnt negative is due to the fact that the drive function doesnt go forward because i was lazy, changing this now would be worse
+        drive(output, -output);  // the reason why one isnt negative is due to the fact that the drive function doesnt go forward because i was lazy, changing this now would be worse
     }
 }
