@@ -47,6 +47,10 @@ extern int selectedauton;
 
 extern int pidRequestedValue;
 
+extern bool breakstack;
+
+extern int autoStackRunning;
+
 void primaryLiftPID(int desired);
 
 void secondaryLiftPID(int desired);

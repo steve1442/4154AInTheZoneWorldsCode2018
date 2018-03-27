@@ -1,5 +1,6 @@
 #include "main.h"
 
+bool breakstack;
 const unsigned int TrueSpeed[128] =
 {
   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -29,6 +30,9 @@ void operatorControl() {
 		if(joystickGetDigital(1, 7, JOY_UP)){roller(50);}
 		else if(joystickGetDigital(1, 7, JOY_DOWN)){roller(-100);}
 		else{roller(15);}
+    if(joystickGetDigital(1, 6, JOY_UP)){breakstack = false;}
+    else if(joystickGetDigital(1, 7, JOY_LEFT)){}
+    else {}
 		delay(20);
 	}
 	taskDelete(UPDATE);
