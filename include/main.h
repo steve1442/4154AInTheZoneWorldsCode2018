@@ -45,6 +45,8 @@ extern int PIDDesired[5];
 
 extern int selectedauton;
 
+extern int pidRequestedValue;
+
 void primaryLiftPID(int desired);
 
 void secondaryLiftPID(int desired);

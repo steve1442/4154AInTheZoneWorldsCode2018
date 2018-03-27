@@ -81,8 +81,8 @@ void drivePID(int leftDesired, int rightDesired)
 */
 
 #define PID_INTEGRAL_LIMIT 50
-#define PID_DRIVE_MAX 100
-#define PID_DRIVE_MIN 50
+#define PID_LIFT_MAX 127
+#define PID_LIFT_MIN 0
 
 bool pidRunning;
 int pidRequestedValue, pid_Ki, pid_Kd, pid_Kp;
@@ -94,7 +94,7 @@ void pidController()
     float  pidLastError;
     float  pidIntegral;
     float  pidDerivative;
-    float  pidDrive;
+    float  pidLift;
 
     // If we are using an encoder then clear it
     //if( SensorType[ PID_SENSOR_INDEX ] == sensorQuadEncoder )
@@ -133,17 +133,16 @@ void pidController()
             pidLastError  = pidError;
 
             // calculate drive
-            pidDrive = (pid_Kp * pidError) + (pid_Ki * pidIntegral) + (pid_Kd * pidDerivative);
+            pidLift = (pid_Kp * pidError) + (pid_Ki * pidIntegral) + (pid_Kd * pidDerivative);
 
             // limit drive
-            if( pidDrive > PID_DRIVE_MAX )
-                pidDrive = PID_DRIVE_MAX;
-            if( pidDrive < PID_DRIVE_MIN )
-                pidDrive = PID_DRIVE_MIN;
+            if( pidLift > PID_LIFT_MAX )
+                pidLift = PID_LIFT_MAX;
+            if( pidLift < PID_LIFT_MIN )
+                pidLift = PID_LIFT_MIN;
 
             // send to motor
-          //  motor[ PID_MOTOR_INDEX ] = pidDrive * PID_MOTOR_SCALE;
-            stabalizationcode(pidDrive);
+            stabalizationcode(pidLift);
             }
         else
             {
@@ -152,7 +151,6 @@ void pidController()
             pidLastError  = 0;
             pidIntegral   = 0;
             pidDerivative = 0;
-            //motor[ PID_MOTOR_INDEX ] = 0;
             stabalizationcode(0);
             }
 
