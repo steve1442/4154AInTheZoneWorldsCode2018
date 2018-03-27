@@ -79,3 +79,84 @@ void drivePID(int leftDesired, int rightDesired)
   drive(leftOutput, rightOutput);
 }
 */
+
+#define PID_INTEGRAL_LIMIT 50
+#define PID_DRIVE_MAX 100
+#define PID_DRIVE_MIN 50
+
+bool pidRunning;
+int pidRequestedValue, pid_Ki, pid_Kd, pid_Kp;
+void pidController()
+{
+    float  pidSensorCurrentValue = 0;
+
+    float  pidError;
+    float  pidLastError;
+    float  pidIntegral;
+    float  pidDerivative;
+    float  pidDrive;
+
+    // If we are using an encoder then clear it
+    //if( SensorType[ PID_SENSOR_INDEX ] == sensorQuadEncoder )
+    //    SensorValue[ PID_SENSOR_INDEX ] = 0;
+
+    // Init the variables - thanks Glenn :)
+    pidLastError  = 0;
+    pidIntegral   = 0;
+
+    while( true )
+        {
+        // Is PID control active ?
+        if( pidRunning )
+            {
+            // Read the sensor value and scale
+            //pidSensorCurrentValue = SensorValue[ PID_SENSOR_INDEX ] * PID_SENSOR_SCALE;
+
+            // calculate error
+            pidError = pidSensorCurrentValue - pidRequestedValue;
+
+            // integral - if Ki is not 0
+            if( pid_Ki != 0 )
+                {
+                int integralcheck =  pidError * 10 ;
+                // If we are inside controlable window then integrate the error
+                if( abs(integralcheck) < PID_INTEGRAL_LIMIT * 10)
+                    pidIntegral = pidIntegral + pidError;
+                else
+                    pidIntegral = 0;
+                }
+            else
+                pidIntegral = 0;
+
+            // calculate the derivative
+            pidDerivative = pidError - pidLastError;
+            pidLastError  = pidError;
+
+            // calculate drive
+            pidDrive = (pid_Kp * pidError) + (pid_Ki * pidIntegral) + (pid_Kd * pidDerivative);
+
+            // limit drive
+            if( pidDrive > PID_DRIVE_MAX )
+                pidDrive = PID_DRIVE_MAX;
+            if( pidDrive < PID_DRIVE_MIN )
+                pidDrive = PID_DRIVE_MIN;
+
+            // send to motor
+          //  motor[ PID_MOTOR_INDEX ] = pidDrive * PID_MOTOR_SCALE;
+            stabalizationcode(pidDrive);
+            }
+        else
+            {
+            // clear all
+            pidError      = 0;
+            pidLastError  = 0;
+            pidIntegral   = 0;
+            pidDerivative = 0;
+            //motor[ PID_MOTOR_INDEX ] = 0;
+            stabalizationcode(0);
+            }
+
+        // Run at 50Hz
+        wait( 25 );
+        }
+}
