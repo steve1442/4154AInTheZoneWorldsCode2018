@@ -85,7 +85,10 @@ void drivePID(int leftDesired, int rightDesired)
 #define PID_LIFT_MIN 0
 
 bool pidRunning;
-int pidRequestedValue, pid_Ki, pid_Kd, pid_Kp;
+int pidRequestedValue;
+float pid_Ki = 0,
+      pid_Kd = 0, 
+      pid_Kp = 0;
 void pidController()
 {
     float  pidSensorCurrentValue = 0;

@@ -103,6 +103,8 @@ void game();
 
 void stabalizationcode(int pwm);
 
+void pidController();
+
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
 extern "C" {

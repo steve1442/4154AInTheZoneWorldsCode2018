@@ -38,10 +38,10 @@ void anothercone(void * ignore)
   holdtheline(100, 127);
 }
 
-void autonomous()
+void auton1()
 {
   lcdPrint(uart1, 1, "auton");
-//  TaskHandle UPDATE = taskRunLoop(update, 5); // updates motors throughout the code
+  TaskHandle UPDATE = taskRunLoop(update, 5); // updates motors throughout the code
   TaskHandle DRIVETASK = taskCreate(drivetask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT); // starts drive task to drive up to the mogo
   TaskHandle MOGOTASK = taskCreate(mogotask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT); // opens the mogo same time as the drive task running to optimize time
   while(taskGetState(DRIVETASK) != TASK_RUNNABLE) {delay(5);} // wait for the drive task to be finished because the mogo task will end first
@@ -54,5 +54,16 @@ void autonomous()
   while(taskGetState(ANOTHERCONE) != TASK_RUNNABLE){ delay(5);} // waits for the drive task to finish
   /* Not sure what to do with this because timing may be perfet to get cones while driving*/
   taskDelete(MOGOINTASK);
-//  taskDelete(UPDATE); // Is the end of the code
+  taskDelete(UPDATE); // Is the end of the code
+}
+void autonomous()
+{
+  switch(selectedauton)
+  {
+    case 1: auton1(); break;
+    case 2:break;
+    case 3:break;
+    case 4:break;
+    default:break;
+  }
 }
