@@ -56,14 +56,131 @@ void auton1()
   taskDelete(MOGOINTASK);
   taskDelete(UPDATE); // Is the end of the code
 }
+
+void auton2()
+{
+  TaskHandle UPDATE = taskRunLoop(update, 5); // updates motors throughout the code
+  lift(127, 127);
+  wait(100);
+  lift(0, 0);
+  mogo(127);
+  wait(1075);
+  mogo(0);
+  holdtheline(1660, 100);
+  mogo(-127);
+  wait(1000);
+  mogo(0);
+  holdtheline(-1640, -100);
+  encoderReset(leftenc);
+  encoderReset(rightenc);
+  while(abs(encoderGet(leftenc)) < 700)
+  {
+    drive(-127, 127);
+    wait(5);
+  }
+  drive(0,0);
+  holdtheline(600, 100);
+  encoderReset(leftenc);
+  encoderReset(rightenc);
+  while(abs(encoderGet(leftenc)) < 464)
+  {
+    drive(-127, 127);
+    wait(5);
+  }
+  drive(0,0);
+  holdtheline(680, 100);
+  mogo(127);
+  wait(700);
+  mogo(0);
+  holdtheline(-100, -100);
+  taskDelete(UPDATE);
+}
+
+void auton3()
+{
+  TaskHandle UPDATE = taskRunLoop(update, 5); // updates motors throughout the code
+  lift(127, 127);
+  wait(100);
+  lift(0, 0);
+  mogo(127);
+  wait(1075);
+  mogo(0);
+  holdtheline(1660, 100);
+  mogo(-127);
+  wait(1000);
+  mogo(0);
+  holdtheline(-1640, -100);
+  encoderReset(leftenc);
+  encoderReset(rightenc);
+  while(abs(encoderGet(leftenc)) < 700)
+  {
+    drive(127, -127);
+    wait(5);
+  }
+  drive(0,0);
+  holdtheline(600, 100);
+  encoderReset(leftenc);
+  encoderReset(rightenc);
+  while(abs(encoderGet(leftenc)) < 464)
+  {
+    drive(127, -127);
+    wait(5);
+  }
+  drive(0,0);
+  holdtheline(680, 100);
+  mogo(127);
+  wait(700);
+  mogo(0);
+  holdtheline(-100, -100);
+  taskDelete(UPDATE);
+}
+
+void auton4()
+{
+  TaskHandle UPDATE = taskRunLoop(update, 5); // updates motors throughout the code
+  lift(127, 127);
+  wait(100);
+  lift(0, 0);
+  mogo(127);
+  wait(1075);
+  mogo(0);
+  holdtheline(1660, 100);
+  mogo(-127);
+  wait(1000);
+  mogo(0);
+  holdtheline(-1640, -100);
+  encoderReset(leftenc);
+  encoderReset(rightenc);
+  while(abs(encoderGet(leftenc)) < 700)
+  {
+    drive(-127, 127);
+    wait(5);
+  }
+  drive(0,0);
+  holdtheline(600, 100);
+  encoderReset(leftenc);
+  encoderReset(rightenc);
+  while(abs(encoderGet(leftenc)) < 464)
+  {
+    drive(-127, 127);
+    wait(5);
+  }
+  drive(0,0);
+  holdtheline(680, 100);
+  mogo(127);
+  wait(700);
+  mogo(0);
+  holdtheline(-100, -100);
+  taskDelete(UPDATE);
+}
 void autonomous()
 {
   switch(selectedauton)
   {
     case 1: auton1(); break;
-    case 2:break;
-    case 3:break;
-    case 4:break;
+    case 2: auton2(); break;
+    case 3: auton3(); break;
+    case 4: auton4(); break;
     default:break;
   }
 }

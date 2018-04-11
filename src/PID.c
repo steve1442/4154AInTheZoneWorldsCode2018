@@ -87,7 +87,7 @@ void drivePID(int leftDesired, int rightDesired)
 bool pidRunning;
 int pidRequestedValue;
 float pid_Ki = 0,
-      pid_Kd = 0, 
+      pid_Kd = 0,
       pid_Kp = 0;
 void pidController()
 {
@@ -99,11 +99,6 @@ void pidController()
     float  pidDerivative;
     float  pidLift;
 
-    // If we are using an encoder then clear it
-    //if( SensorType[ PID_SENSOR_INDEX ] == sensorQuadEncoder )
-    //    SensorValue[ PID_SENSOR_INDEX ] = 0;
-
-    // Init the variables - thanks Glenn :)
     pidLastError  = 0;
     pidIntegral   = 0;
 
@@ -112,9 +107,6 @@ void pidController()
         // Is PID control active ?
         if( pidRunning )
             {
-            // Read the sensor value and scale
-            //pidSensorCurrentValue = SensorValue[ PID_SENSOR_INDEX ] * PID_SENSOR_SCALE;
-
             // calculate error
             pidError = pidSensorCurrentValue - pidRequestedValue;
 
@@ -144,7 +136,7 @@ void pidController()
             if( pidLift < PID_LIFT_MIN )
                 pidLift = PID_LIFT_MIN;
 
-            // send to motor
+            // update motor
             stabalizationcode(pidLift);
             }
         else
@@ -156,8 +148,7 @@ void pidController()
             pidDerivative = 0;
             stabalizationcode(0);
             }
-
         // Run at 50Hz
-        wait( 25 );
+        wait( 15 );
         }
 }

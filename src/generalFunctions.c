@@ -4,26 +4,30 @@ char motor[11] = {0,0,0,0,0,0,0,0,0,0,0};
 
 void lift(int left, int right)
 {
-  motor[6] = left;
-  motor[7] = right;
+  motor[8] = left;
+  motor[9] = right;
+}
+
+void liftlift(int pwm)
+{
+  motor[8] = pwm;
+  motor[9] = pwm;
 }
 
 void secondaryLift(int pwm)
 {
-  motor[9] = pwm;
+  motor[7] = pwm;
 }
 
 void drive(int left, int right)
 {
-  motor[2] = left;
-  motor[3] = left;
-  motor[4] = right;
-  motor[5] = right;
+  motor[3] = -left;
+  motor[2] = -right;
 }
 
 void roller(int pwm)
 {
-  motor[8] = pwm;
+  motor[6] = pwm;
 }
 
 void mogo(int pwm)

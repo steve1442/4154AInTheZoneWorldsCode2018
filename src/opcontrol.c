@@ -21,23 +21,25 @@ const unsigned int TrueSpeed[128] = // array used as a converter to make joy val
 void operatorControl() {
 	TaskHandle UPDATE = taskRunLoop(update, 10); // starts motor update task
 	TaskHandle LCDDEBUG = taskRunLoop(LCDDebugScreens, 10); // runs the debug task that displays important values like sensors
-  TaskHandle PID = taskRunLoop(pidController, 10); // runs the pid control loop calculating our pid for our lift allowing it to be stable
+//  TaskHandle PID = taskRunLoop(pidController, 10); // runs the pid control loop calculating our pid for our lift allowing it to be stable
 	while (1) { // main loop, everything inside this is constantly refreshed
     pidRequestedValue += 1 * (joystickGetDigital(1, 5, JOY_UP) - joystickGetDigital(1, 5, JOY_DOWN)); // simple way to do the work of 2 if statements
 		drive(TrueSpeed[abs(joystickGetAnalog(1, 3))] * (joystickGetAnalog(1, 3)/abs(joystickGetAnalog(1, 3))), // drive control
 		TrueSpeed[abs(joystickGetAnalog(1, 2))] * (joystickGetAnalog(1, 2)/abs(joystickGetAnalog(1, 2))));      // that uses the treeSpeed array
 		mogo(-127 * (joystickGetDigital(1, 5, JOY_UP) - joystickGetDigital(1, 5, JOY_DOWN))); // no need for complex mogo so we do the same with the pid but for the motor val
-		stabalizationcode(127 * (joystickGetDigital(1, 6, JOY_UP) - joystickGetDigital(1, 6, JOY_DOWN))); // original stabalization code that is still being tested
+		//stabalizationcode(127 * (joystickGetDigital(2, 6, JOY_UP) - joystickGetDigital(2, 6, JOY_DOWN))); // original stabalization code that is still being tested
 		secondaryLift(127 * (joystickGetDigital(1, 8, JOY_UP) - joystickGetDigital(1, 8, JOY_DOWN))); // dont need a advance fb because its just going to 2 points
-		if(joystickGetDigital(1, 7, JOY_UP)){roller(50);}       // 15 + (joy * 45) + (-joy * 100);
-		else if(joystickGetDigital(1, 7, JOY_DOWN)){roller(-100);}
+    liftlift(127 * (joystickGetDigital(1, 6, JOY_UP) - joystickGetDigital(1, 6, JOY_DOWN)));
+/*
+    if(joystickGetDigital(2, 7, JOY_UP)){roller(50);}       // 15 + (joy * 45) + (-joy * 100);
+		else if(joystickGetDigital(2, 7, JOY_DOWN)){roller(-100);}
 		else{roller(15);}
-    if(joystickGetDigital(1, 6, JOY_UP)){breakstack = false;}
-    else if(joystickGetDigital(1, 7, JOY_LEFT)){}
-    else {}
+    if(joystickGetDigital(2, 6, JOY_UP)){breakstack = false;}
+    else if(joystickGetDigital(2, 7, JOY_LEFT)){}
+    else {}*/
 		delay(20);
 	}
 	taskDelete(UPDATE);
 	taskDelete(LCDDEBUG);
-  taskDelete(PID);
+//  taskDelete(PID);
 }
